@@ -10,6 +10,8 @@
 <img width="295" alt="image" src="https://user-images.githubusercontent.com/98624810/154326944-04fa74d2-3156-4529-9a0d-843bfb74209d.png">
 
 # 2、Software
-Qt/GUI
-Threads/Timing
-SQL Database
+(1)Qt/GUI
+
+(2)Threads/Timing
+
+(3)SQL Database
