@@ -24,7 +24,9 @@ On-chip power supply regulator for load-cell and ADC analog power supply, On-chi
 
 (4)Relay
 
+![电路图1](https://user-images.githubusercontent.com/99829195/164106135-2f8136bd-c377-4520-a72b-ac098054a747.jpg)
 
+![电路图2](https://user-images.githubusercontent.com/99829195/164106155-6315b304-3217-4cd3-88f7-291663c1088a.jpg)
 
 # 2、Software
 (1)Qt/GUI
