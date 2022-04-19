@@ -13,9 +13,6 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <property name="locale">
-   <locale language="English" country="UnitedKingdom"/>
-  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QGraphicsView" name="graphicsView_camera">
     <property name="geometry">
@@ -32,12 +29,12 @@
      <rect>
       <x>50</x>
       <y>70</y>
-      <width>63</width>
-      <height>13</height>
+      <width>121</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Display</string>
+     <string>Camera Window</string>
     </property>
    </widget>
    <widget class="QPushButton" name="open_camera">
@@ -45,12 +42,12 @@
      <rect>
       <x>630</x>
       <y>110</y>
-      <width>78</width>
+      <width>131</width>
       <height>24</height>
      </rect>
     </property>
     <property name="text">
-     <string>Open Camera</string>
+     <string>Turn on Camera</string>
     </property>
    </widget>
    <widget class="QPushButton" name="bt_stop">
@@ -71,12 +68,12 @@
      <rect>
       <x>630</x>
       <y>170</y>
-      <width>78</width>
+      <width>131</width>
       <height>24</height>
      </rect>
     </property>
     <property name="text">
-     <string>Detection</string>
+     <string>Turn on Device</string>
     </property>
    </widget>
    <widget class="QSlider" name="horizontalSlider">
@@ -97,12 +94,12 @@
      <rect>
       <x>630</x>
       <y>250</y>
-      <width>101</width>
+      <width>151</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Setting Weight For Feeding</string>
+     <string>Set Feeding Amount</string>
     </property>
    </widget>
    <widget class="QTextEdit" name="label_set_weight_show">
@@ -135,7 +132,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Remaining</string>
+     <string>Food Weight</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
@@ -143,12 +140,12 @@
      <rect>
       <x>630</x>
       <y>380</y>
-      <width>101</width>
+      <width>131</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Eating times</string>
+     <string>Mumber of Meals</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_5">
@@ -161,7 +158,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Health condition</string>
+     <string>Health Status</string>
     </property>
    </widget>
    <widget class="QTextEdit" name="feed_count">
@@ -174,7 +171,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QTextEdit" name="last_value_3">
+   <widget class="QTextEdit" name="healthy">
     <property name="geometry">
      <rect>
       <x>810</x>
@@ -184,6 +181,19 @@
      </rect>
     </property>
    </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>121</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TEAM 14</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -191,7 +201,7 @@
      <x>0</x>
      <y>0</y>
      <width>949</width>
-     <height>24</height>
+     <height>27</height>
     </rect>
    </property>
   </widget>

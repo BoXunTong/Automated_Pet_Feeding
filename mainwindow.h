@@ -21,24 +21,26 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    // Declaring variables
+    // Variable declaration
     QString setWeightValueshow;
     Weight_detect_thread *mWeight_detect_thread;
 
-    QTimer *Time_camera ;// camera update time
+    QTimer *Time_camera ;// Camera update time
 
     //camera
     cv::VideoCapture cap;
     cv::Mat frame;
     QGraphicsScene *scene = new QGraphicsScene;
 
-    // Switch detection
+    // Switches dectection
     bool detect_w = false;
 
-    // Threads detection
+    // Threads dectection
     Detect_pet_thread *mDetect_pet_thread;
     void initPin();
-    int water_motion_pin = 1;
+    int water_motion_pin = 29;
+    int mm = 0;
+    int mTime_curr = 0;
 
 private slots:
     // Inline
