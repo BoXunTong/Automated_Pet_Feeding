@@ -4,12 +4,9 @@
 #include <QMainWindow>
 #include <QTimer>
 #include <QGraphicsScene>
-#include <weight_detect_thread.h>
-#include <opencv2/opencv.hpp>
+#include "camera_precess.h"
 #include "detect_pet_thread.h"
-#include <wiringPi.h>
 
-//using namespace cv;
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -21,36 +18,22 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    // Variable declaration
-    QString setWeightValueshow;
-    Weight_detect_thread *mWeight_detect_thread;
 
-    QTimer *Time_camera ;// Camera update time
-
-    //camera
-    cv::VideoCapture cap;
-    cv::Mat frame;
-    QGraphicsScene *scene = new QGraphicsScene;
-
-    // Switches dectection
-    bool detect_w = false;
-
-    // Threads dectection
+    //检测线程
     Detect_pet_thread *mDetect_pet_thread;
-    void initPin();
-    int water_motion_pin = 29;
-    int mm = 0;
-    int mTime_curr = 0;
 
 private slots:
-    // Inline
-    void on_start_detect_clicked();
     void on_open_camera_clicked();
+    void open_camera_preview_time();
     void on_bt_stop_clicked();
-
-    void open_camera_time_click();
+    void on_start_detect_clicked();
 
 private:
     Ui::MainWindow *ui;
+    QTimer *Time_camera ;//camera的更新时间
+    Camera_precess mCamera_precess;
+    QGraphicsScene *scene = new QGraphicsScene;
+
+
 };
 #endif // MAINWINDOW_H
