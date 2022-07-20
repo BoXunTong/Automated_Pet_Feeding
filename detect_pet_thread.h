@@ -23,7 +23,7 @@ class Detect_pet_thread: public QThread
     Q_OBJECT
 public:
     Detect_pet_thread();
-
+    ~Detect_pet_thread();
     void setMainThreadImage(Mat src);
     Mat getMainThreadImage();
     void setFeedCount(int mFeed);

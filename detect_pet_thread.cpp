@@ -20,13 +20,18 @@ Detect_pet_thread::Detect_pet_thread()
     }*/
 
 }
-
+ Detect_pet_thread::~Detect_pet_thread()
+{
+     //强制关闭窗口时，线程也能安全关闭
+      requestInterruption();
+      wait();
+}
 
 void Detect_pet_thread::run()
 {
     int i = 0;
     //Motor_control mMotor_control;
-    while(true){
+    while(!isInterruptionRequested()){
         /*if(lock_img) {
             if (frame.empty()) {
                   cout << "ERROR: Unable to grab from the camera" << endl;
@@ -40,7 +45,10 @@ void Detect_pet_thread::run()
         i++;
         qDebug("detect_pet run....");
         detect_from_video(frame);
-        msleep(1000);
+
+        imshow("detect", getMainThreadImage());
+        waitKey(1000);
+        //msleep(1000);
         if(i%10 == 0){
             qDebug("detect_pet callback....");
             FunB1(Motor_control::find_pets);

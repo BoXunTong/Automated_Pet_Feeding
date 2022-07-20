@@ -13,13 +13,15 @@ SOURCES += \
     detect_pet_thread.cpp \
     main.cpp \
     mainwindow.cpp \
-    motor_control.cpp
+    motor_control.cpp \
+    weight_detect_thread.cpp
 
 HEADERS += \
     camera_precess.h \
     detect_pet_thread.h \
     mainwindow.h \
-    motor_control.h
+    motor_control.h \
+    weight_detect_thread.h
 
 FORMS += \
     mainwindow.ui
