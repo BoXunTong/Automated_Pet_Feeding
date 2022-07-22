@@ -23,16 +23,16 @@ void MainWindow::on_open_camera_clicked()
     Time_camera = new QTimer(this);
     connect(Time_camera, SIGNAL(timeout()), this, SLOT(open_camera_preview_time()));
     Time_camera->start(30);//30ms刷新一次camera fps=30
-    mCamera_precess.openCamera();
+
 
 }
 
 void MainWindow::open_camera_preview_time()
 {
-    Mat frame = mCamera_precess.previewCamera();
-    mDetect_pet_thread->setMainThreadImage(frame);
+    //Mat frame = mCamera_precess.previewCamera();
+    //mDetect_pet_thread->setMainThreadImage(frame);
     int h771OutValue = mWeight_detect_thread->getH711Value();
-    updateUi(frame, h771OutValue);
+    //updateUi(frame, h771OutValue);
 }
 
 void MainWindow::on_bt_stop_clicked()

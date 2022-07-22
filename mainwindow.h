@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QTimer>
 #include <QGraphicsScene>
-#include "camera_precess.h"
 #include "detect_pet_thread.h"
 #include "weight_detect_thread.h"
 
@@ -33,7 +32,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QTimer *Time_camera ;//camera的更新时间
-    Camera_precess mCamera_precess;
     QGraphicsScene *scene = new QGraphicsScene;
     void initUi();
     void updateUi(Mat mFrame, int mH771OutValue);
