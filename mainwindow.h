@@ -3,26 +3,26 @@
 
 #include <QMainWindow>
 #include <QTimer>
+#include "hx711_thread.h"
+#include <opencv2/opencv.hpp>
 #include <QGraphicsScene>
+#include "camera_precess.h"
 #include "detect_pet_thread.h"
-#include "weight_detect_thread.h"
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
+using namespace cv;
+namespace Ui {
+class MainWindow;
+}
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
-    //检测线程
+    hx711_thread *mhx711_thread;
     Detect_pet_thread *mDetect_pet_thread;
-    Weight_detect_thread *mWeight_detect_thread;
-
 private slots:
     void on_open_camera_clicked();
     void open_camera_preview_time();
@@ -35,6 +35,7 @@ private:
     QGraphicsScene *scene = new QGraphicsScene;
     void initUi();
     void updateUi(Mat mFrame, int mH771OutValue);
-
+    Camera_precess m_Camera_precess;
 };
+
 #endif // MAINWINDOW_H

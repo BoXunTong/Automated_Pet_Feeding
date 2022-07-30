@@ -1,9 +1,10 @@
 #include "detect_pet_thread.h"
 
+
 Detect_pet_thread::Detect_pet_thread()
 {
     // Load model
-    /*model = tflite::FlatBufferModel::BuildFromFile("detect.tflite");
+    model = tflite::FlatBufferModel::BuildFromFile("detect.tflite");
 
     // Build the interpreter
 
@@ -17,8 +18,8 @@ Detect_pet_thread::Detect_pet_thread()
     {
         cout << "loading labels failed";
         exit(-1);
-    }*/
-
+    }
+    Motor_control::initPin();
 }
  Detect_pet_thread::~Detect_pet_thread()
 {
@@ -29,33 +30,30 @@ Detect_pet_thread::Detect_pet_thread()
 
 void Detect_pet_thread::run()
 {
-    int i = 0;
-    //Motor_control mMotor_control;
     while(!isInterruptionRequested()){
-        /*if(lock_img) {
-            if (frame.empty()) {
-                  cout << "ERROR: Unable to grab from the camera" << endl;
-                  return;
-             }
-            qDebug("detect_pet run....");
-            detect_from_video(frame);
-            msleep(100);
-
-        }*/
-        i++;
-        qDebug("detect_pet run....");
-        detect_from_video(frame);
-
-        imshow("detect", getMainThreadImage());
-        waitKey(1000);
-        //msleep(1000);
-        if(i%10 == 0){
-            qDebug("detect_pet callback....");
-            FunB1(Motor_control::find_pets);
+        time_count++;
+        starts=clock();
+        if(lock_img){
+            detect_from_video(frame);        
         }
+
+        ends=clock();
+        if(time_count % 1000 == 0) {
+            cout<<"detect_pet cost time = " << (ends - starts) / 10000<< " ms" <<endl;
+            time_count = 0;
+        }
+
+        cout << "WeightState = " << m_globalwrapper_MM << endl;
+        if(m_globalwrapper_MM==1 && getFindCat()){
+                    qDebug("detect_pet callback....");
+                    callbackPet(Motor_control::motor_run);
+        }else {
+                    qDebug("detect_pet callback....");
+                    callbackPet(Motor_control::motor_stop);
+        }
+        msleep(1000);
+        //qDebug("detect_pet endl....");
     }
-
-
 }
 
 
@@ -82,9 +80,6 @@ bool Detect_pet_thread::getFileContent(std::string fileName)
 
 void Detect_pet_thread::detect_from_video(Mat &src)
 {
-
-
-    /*
     Mat image;
     //int cam_width =src.cols;
     //int cam_height=src.rows;
@@ -109,18 +104,20 @@ void Detect_pet_thread::detect_from_video(Mat &src)
     {
         if(detection_scores[i] > confidence_threshold)
         {
+
             int  det_index = (int)detection_classes[i]+1;
             if(Labels[det_index].c_str() == "dog"){
-                qDebug("*************************************");
+                qDebug("************************************* ");
             }
+            cout<< " index = " << det_index << std::endl;
             if(det_index == 18)
             {
                 setFindCat(true);
                 detect_state = true;
                 mNum++;
                 if (mNum == 2) {
-                    qDebug("find a dog...");
-                    mFeedCount++;
+                    qDebug(" find a dog...");
+                    m_globalFeedCount++;
                     //setFeedCount(mFeedCount);
                 }
                 break;
@@ -136,7 +133,6 @@ void Detect_pet_thread::detect_from_video(Mat &src)
         mNum = 0;
     }
 
-    */
 }
 
 
@@ -158,11 +154,11 @@ void Detect_pet_thread::setMainThreadImage(Mat src)
 
 void Detect_pet_thread::setFeedCount(int mFeed)
 {
-    mFeedCount = mFeed;
+    //mFeedCount = mFeed;
 }
 int Detect_pet_thread::getFeedCount()
 {
-    return mFeedCount;
+    return 0;
 }
 
 void Detect_pet_thread::setFindCat(bool mCat)

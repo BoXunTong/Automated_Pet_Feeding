@@ -1,26 +1,35 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
 {
-
     ui->setupUi(this);
     initUi();
-    //检测线程
+    mhx711_thread  = new hx711_thread();
     mDetect_pet_thread = new Detect_pet_thread();
-    mWeight_detect_thread  = new Weight_detect_thread();
 }
 
 MainWindow::~MainWindow()
 {
+    mhx711_thread->quit();
+    mhx711_thread->~hx711_thread();
+    mDetect_pet_thread->quit();
+    mDetect_pet_thread->~Detect_pet_thread();
     delete ui;
 }
+
 
 void MainWindow::on_open_camera_clicked()
 {
     Time_camera = new QTimer(this);
+    bool OpenCamera = m_Camera_precess.openCamera();
+    if(!OpenCamera){
+        qDebug("open camera failed !");
+    } else {
+        qDebug("open Camera success");
+    }
     connect(Time_camera, SIGNAL(timeout()), this, SLOT(open_camera_preview_time()));
     Time_camera->start(30);//30ms刷新一次camera fps=30
 
@@ -29,10 +38,11 @@ void MainWindow::on_open_camera_clicked()
 
 void MainWindow::open_camera_preview_time()
 {
-    //Mat frame = mCamera_precess.previewCamera();
-    //mDetect_pet_thread->setMainThreadImage(frame);
-    int h771OutValue = mWeight_detect_thread->getH711Value();
-    //updateUi(frame, h771OutValue);
+    Mat frame;
+    frame = m_Camera_precess.previewCamera();
+    mDetect_pet_thread->setMainThreadImage(frame);
+    int h771OutValue = mhx711_thread->getHx711Value();
+    updateUi(frame, h771OutValue);
 }
 
 void MainWindow::on_bt_stop_clicked()
@@ -44,15 +54,7 @@ void MainWindow::on_bt_stop_clicked()
 void MainWindow::on_start_detect_clicked()
 {
     mDetect_pet_thread->start();
-    //mWeight_detect_thread->start();
-}
-
-void MainWindow::initUi()
-{
-    ui->horizontalSlider->setMinimum(0);
-    ui->horizontalSlider->setMaximum(2000);
-    ui->horizontalSlider->setSingleStep(20);
-
+    mhx711_thread->start();
 }
 
 void MainWindow::updateUi(Mat mFrame, int mH771OutValue)
@@ -62,7 +64,7 @@ void MainWindow::updateUi(Mat mFrame, int mH771OutValue)
     scene->addPixmap(QPixmap::fromImage(showImage));
     ui->graphicsView_camera->setScene(scene);
     ui->graphicsView_camera->show();
-
+    mhx711_thread->setHx711ValueFromUi(ui->horizontalSlider->value());
     //显示设置投喂重量
     QString weightshow;
     int setWight = ui->horizontalSlider->value();
@@ -71,4 +73,18 @@ void MainWindow::updateUi(Mat mFrame, int mH771OutValue)
     QString leftover;
     leftover.sprintf("%d (g)", mH771OutValue);// int to string
     ui->last_value->setText(leftover);
+
+    QString feedCountshow;
+    feedCountshow.sprintf("%d ", m_globalFeedCount);
+    ui->feed_count->setText(feedCountshow);
+    ui->healthy->setText("healthy");
+
+}
+
+void MainWindow::initUi()
+{
+    ui->horizontalSlider->setMinimum(0);
+    ui->horizontalSlider->setMaximum(2000);
+    ui->horizontalSlider->setSingleStep(20);
+    //mWeight_detect_thread->setWeightValue = ui->horizontalSlider;
 }

@@ -2,18 +2,24 @@
 #define MOTOR_CONTROL_H
 
 #include<iostream>
+//#include <wiringPi.h>
 
 using namespace std;
 
 class Motor_control
 {
 public:
+
     Motor_control();
-    void motor_run();
-    void motor_stop();
+    static void motor_run();
+    static void motor_stop();
+    bool motor_usable(bool usable_motor);
     //fun
     static void find_pets();
+    static void initPin();
+private:
 
+    static const int water_motion_pin = 7;
 };
 
 #endif // MOTOR_CONTROL_H
