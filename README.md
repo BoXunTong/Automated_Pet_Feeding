@@ -33,7 +33,7 @@ On-chip power supply regulator for load-cell and ADC analog power supply, On-chi
 
 (2)Threads/Timing
 
-The code is in test_qt folder.
+The code is in Code folder.
 
 
 ![Main thread MainWindow](https://user-images.githubusercontent.com/98624810/182033148-d29f601d-14c4-484d-8a09-5fbab50d336c.jpg)
@@ -48,7 +48,7 @@ The code is in test_qt folder.
 
 # YouTube Link
 
-https://youtu.be/wU3hO5N8FNw
+https://youtu.be/xPs7qO0fQtA
 
 
 
