@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     initUi();
     mhx711_thread  = new hx711_thread();
     mDetect_pet_thread = new Detect_pet_thread();
+    qDebug("setup Main Thread UI success");
 }
 
 MainWindow::~MainWindow()
@@ -31,7 +32,7 @@ void MainWindow::on_open_camera_clicked()
         qDebug("open Camera success");
     }
     connect(Time_camera, SIGNAL(timeout()), this, SLOT(open_camera_preview_time()));
-    Time_camera->start(30);//30ms刷新一次camera fps=30
+    Time_camera->start(30);//30ms refresh camera fps=30
 
 
 }
@@ -47,7 +48,12 @@ void MainWindow::open_camera_preview_time()
 
 void MainWindow::on_bt_stop_clicked()
 {
-    printf("exit....");
+
+    mDetect_pet_thread->~Detect_pet_thread();
+    mDetect_pet_thread->quit();
+    mhx711_thread->~hx711_thread();
+    mhx711_thread->quit();
+    printf("exit....\n");
     this->close();
 }
 
@@ -65,7 +71,7 @@ void MainWindow::updateUi(Mat mFrame, int mH771OutValue)
     ui->graphicsView_camera->setScene(scene);
     ui->graphicsView_camera->show();
     mhx711_thread->setHx711ValueFromUi(ui->horizontalSlider->value());
-    //显示设置投喂重量
+    // Display of set feeding weight
     QString weightshow;
     int setWight = ui->horizontalSlider->value();
     weightshow.sprintf("%d (g)", setWight);// float to string

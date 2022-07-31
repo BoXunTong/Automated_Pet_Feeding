@@ -19,11 +19,12 @@ Detect_pet_thread::Detect_pet_thread()
         cout << "loading labels failed";
         exit(-1);
     }
+    printf("setup Detect_pet_thread success \n");
     Motor_control::initPin();
 }
  Detect_pet_thread::~Detect_pet_thread()
 {
-     //强制关闭窗口时，线程也能安全关闭
+     //Threads close safely even when forcing windows to close
       requestInterruption();
       wait();
 }
@@ -32,25 +33,40 @@ void Detect_pet_thread::run()
 {
     while(!isInterruptionRequested()){
         time_count++;
-        starts=clock();
+        //starts=clock();
         if(lock_img){
             detect_from_video(frame);        
         }
 
-        ends=clock();
-        if(time_count % 1000 == 0) {
-            cout<<"detect_pet cost time = " << (ends - starts) / 10000<< " ms" <<endl;
+
+
+        /*if(time_count % 2 == 0) {
+            //cout<<"detect_pet cost time = " << (ends - starts) / 10000<< " ms" <<endl;
             time_count = 0;
-        }
+        }*/
 
         cout << "WeightState = " << m_globalwrapper_MM << endl;
         if(m_globalwrapper_MM==1 && getFindCat()){
-                    qDebug("detect_pet callback....");
-                    callbackPet(Motor_control::motor_run);
+            callbackPet(Motor_control::motor_run);
+
         }else {
-                    qDebug("detect_pet callback....");
-                    callbackPet(Motor_control::motor_stop);
+            callbackPet(Motor_control::motor_stop);
+
         }
+        /*
+        if(m_globalwrapper_MM==1 && getFindCat()){
+            last_motor_state[1] = 1;
+            if(last_motor_state[0] != last_motor_state[1]){
+                callbackPet(Motor_control::motor_run);
+            }
+            last_motor_state[0] = 1;
+        }else {
+            last_motor_state[1] = 0;
+            if(last_motor_state[0] != last_motor_state[1]){
+                callbackPet(Motor_control::motor_stop);
+            }
+            last_motor_state[0] = 0;
+        }*/
         msleep(1000);
         //qDebug("detect_pet endl....");
     }
@@ -80,6 +96,9 @@ bool Detect_pet_thread::getFileContent(std::string fileName)
 
 void Detect_pet_thread::detect_from_video(Mat &src)
 {
+    starts=clock();
+
+
     Mat image;
     //int cam_width =src.cols;
     //int cam_height=src.rows;
@@ -120,6 +139,8 @@ void Detect_pet_thread::detect_from_video(Mat &src)
                     m_globalFeedCount++;
                     //setFeedCount(mFeedCount);
                 }
+                ends=clock();
+                cout<<"detect_pet cost time = " << (ends - starts) / 10000<< " ms" <<endl;
                 break;
             }
         }

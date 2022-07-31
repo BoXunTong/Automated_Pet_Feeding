@@ -2,7 +2,7 @@
 #define MOTOR_CONTROL_H
 
 #include<iostream>
-//#include <wiringPi.h>
+#include <wiringPi.h>
 
 using namespace std;
 
@@ -18,8 +18,8 @@ public:
     static void find_pets();
     static void initPin();
 private:
+    static const int water_motion_pin = 29;
 
-    static const int water_motion_pin = 7;
 };
 
 #endif // MOTOR_CONTROL_H

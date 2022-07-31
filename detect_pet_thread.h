@@ -63,6 +63,7 @@ private:
     clock_t starts, ends;
     //hx711_thread m_hx711_thread;
     globalWrapper m_globalwrapper;
+    int last_motor_state[2] = {0, 0};
 };
 
 #endif // DETECT_PET_THREAD_H

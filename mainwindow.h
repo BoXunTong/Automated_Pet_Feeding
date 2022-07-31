@@ -31,7 +31,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QTimer *Time_camera ;//camera的更新时间
+    QTimer *Time_camera ;//Update times for camera
     QGraphicsScene *scene = new QGraphicsScene;
     void initUi();
     void updateUi(Mat mFrame, int mH771OutValue);

@@ -9,11 +9,11 @@
 
 hx711_thread::hx711_thread():hx(2, 3, 1269, -385160){
     hx.setUnit(HX711::Mass::Unit::OZ);
-    //qDebug("setup ....");
+    qDebug("setup hx711 success....");
 }
 
 hx711_thread::~hx711_thread(){
-    //强制关闭窗口时，线程也能安全关闭
+    // Threads close safely even when forcing windows to close
      requestInterruption();
      wait();
 }
@@ -47,24 +47,21 @@ void hx711_thread::run()
         starts=clock();
         m_weight_value = (int)hx.weight(10);
         ends=clock();
-        if(time_count % 10 == 0) {
-            std::cout<<"detect_weight cost time = " << (ends - starts) / 10000<< " ms" <<std::endl;
+        std::cout<<"detect_weight cost time = " << (ends - starts) / 10000<< " ms" <<std::endl;
+        if(time_count % 2 == 0) {
+
             //std::cout<<"detect_weight cost time = " << m_weight_value << " g" <<std::endl;
             time_count = 0;
         }
 
-        std::cout<<"water_weight_ui_threshold = " << water_weight_ui_threshold << " g" <<std::endl;
+        //std::cout<<"water_weight_ui_threshold = " << water_weight_ui_threshold << " g" <<std::endl;
         if(m_weight_value < water_weight_ui_threshold){
             //setWeightState(true);
             m_globalwrapper_MM = 1;
-            //std::cout<<"water_weight_ui_threshold = " << water_weight_ui_threshold << " g" <<std::endl;
-            //m_globalwrapper.tests_run(1);
-            //int getN = m_globalwrapper.tests_run();
-            //std::cout<<"getN = " << getN << " g" <<std::endl;
+
         } else {
             m_globalwrapper_MM = 0;
-            //setWeightState(false);
-            //m_globalwrapper.tests_run(0);
+
         }
 
         msleep(10);
