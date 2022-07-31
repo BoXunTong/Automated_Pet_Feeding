@@ -1,7 +1,6 @@
 # Auto-Feeding Pets Machine
 For more details please check the [wiki](https://github.com/BoXunTong/Automated_Pet_Feeding/wiki).
 
-[TOC]
 
 # 1. Project Introduction
 
@@ -54,8 +53,11 @@ The code structure diagram of the software is as follows.
 ## 3.1 Prerequisites
 
 HX711 and Qt5 are required. Users can use following script to install:
+
 *git clone --depth= 1 https://github.com/endail/hx711*
+
 *cd hx711*
+
 *make && sudo make install*
 
 ## 3.2 Build Application Manually
@@ -63,20 +65,25 @@ HX711 and Qt5 are required. Users can use following script to install:
 1. Get the “HX711_demo” package. And put it under the “projects” folder.
 
 2. Install Dependency with Script (HX711)
+
    *git clone --depth= 1 https://github.com/endail/hx711*
+   
    *cd hx711*
+   
    *make && sudo make install*
 
 3. Find the “HX711_demo.pro” document and build it.
+![image](https://user-images.githubusercontent.com/98624810/182037413-6a5a140d-15a7-48c6-99e8-4b86c570b943.png)
 
-   ![img](https://lh5.googleusercontent.com/MzI1-beLc5qw_cS1BgAZZ0dVY1XFyghD_zjMkAlmKZObpokp1i4jbMwG46YEyNqzM6dDSmIUFHksKKo2GSfyzqZVl_TcbfUQtfWCwKm9cr77IcSB_Qjl_Gnx7JDavtG5A2NsKYAYvOX6tgfp)
 
 4. Find the “build-hx711_demo-Desktop-Debug” folder
+![image](https://user-images.githubusercontent.com/98624810/182037420-67d3fb8f-054c-43b0-a213-2009364df7c5.png)
 
-   ![img](https://lh5.googleusercontent.com/CFFp4tZ-XNDc-e1uePOnMQ9EOVCuvxT19eZtcL_TNdX5aRHztTgOl1bFad3SVOYaRnW-PANLCy3IcKqskE0jOyIOjcoAq9-M1a9Ns2jLqvFYOsjjps7oPtDliq8ukelk101GM4T_82WKc2xO)
 
 5. Run the application
+
    *cd projects/build-hx711_demo-Desktop-Debug*
+   
    *./HX711_demo*
 
 
@@ -85,7 +92,7 @@ HX711 and Qt5 are required. Users can use following script to install:
 
 View Project Plan Gantt
 
-![Project_Plan_Gantt](C:\Users\Yue\Downloads\Automated_Pet_Feeding-main\Automated_Pet_Feeding-main\Project_Plan_Gantt.png)
+![Project_Plan_Gantt](https://user-images.githubusercontent.com/98624810/182037332-55271515-0b66-4416-b272-bda6f576a39d.png)
 
 View issue list
 
@@ -101,11 +108,11 @@ https://youtu.be/xPs7qO0fQtA
 
 **Twitter**
 
-
+https://twitter.com/XueyanZhang2637
 
 **Instagram**
 
-
+https://www.instagram.com/autofeedingpetsmachine_/
 
 
 
