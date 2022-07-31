@@ -35,7 +35,8 @@ On-chip power supply regulator for load-cell and ADC analog power supply, On-chi
 
 The code is in test_qt folder.
 
-![Design Framework](https://user-images.githubusercontent.com/99829195/164115711-88f7529d-dd5c-44a1-9ad1-5391acd46077.png)
+
+![Main thread MainWindow](https://user-images.githubusercontent.com/98624810/182033148-d29f601d-14c4-484d-8a09-5fbab50d336c.jpg)
 
 
 
